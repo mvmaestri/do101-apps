@@ -5,7 +5,6 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('weather:server');
 var http = require('http');
 
 /**
@@ -82,9 +81,15 @@ function onError(error) {
  */
 
 function onListening() {
+
+  console.log("Running from", process.env.HOSTNAME);
+  console.log("Revision", process.env.revision);
+  console.log("Git branch", process.env.ref);
+  console.log("Git author", process.env.author);
+  console.log("Git commit", process.env.message);
+  
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
 }
