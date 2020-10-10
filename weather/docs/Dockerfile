@@ -1,4 +1,4 @@
-FROM ubi8/s2i-base:rhel8.2
+FROM ubi8/ruby-25
 
 # This image provides a Ruby environment you can use to run your Ruby
 # applications.
