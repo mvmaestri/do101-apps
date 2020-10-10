@@ -1,4 +1,4 @@
-FROM ubi8/ruby-25
+FROM ubi8/s2i-base
 
 # This image provides a Ruby environment you can use to run your Ruby
 # applications.
@@ -6,7 +6,7 @@ FROM ubi8/ruby-25
 EXPOSE 8080
 
 ENV RUBY_MAJOR_VERSION=2 \
-    RUBY_MINOR_VERSION=5
+    RUBY_MINOR_VERSION=7
 
 ENV RUBY_VERSION="${RUBY_MAJOR_VERSION}.${RUBY_MINOR_VERSION}" \
     RUBY_SCL_NAME_VERSION="${RUBY_MAJOR_VERSION}${RUBY_MINOR_VERSION}"
@@ -36,6 +36,7 @@ LABEL summary="$SUMMARY" \
 
 RUN yum -y module enable ruby:$RUBY_VERSION && \
     INSTALL_PKGS=" \
+    libffi-devel \
     ruby \
     ruby-devel \
     rubygem-rake \
@@ -59,25 +60,4 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
 USER 1001
 
 # Set the default CMD to print the usage of the language image
-# CMD $STI_SCRIPTS_PATH/usage
-
-# FROM ruby:2.6-slim
-
-# WORKDIR /srv/slate
-
-# VOLUME /srv/slate/source
-# EXPOSE 4567
-
-# COPY . /srv/slate
-
-# RUN apt-get update \
-#     && apt-get install -y --no-install-recommends \
-#         build-essential \
-#         nodejs \
-#     && gem install bundler \
-#     && bundle install \
-#     && apt-get remove -y build-essential \
-#     && apt-get autoremove -y \
-#     && rm -rf /var/lib/apt/lists/*
-
-# CMD ["bundle", "exec", "middleman", "server", "--watcher-force-polling"]
+CMD $STI_SCRIPTS_PATH/usage
