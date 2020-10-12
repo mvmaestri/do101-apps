@@ -11,4 +11,5 @@ USER 1001
 RUN /usr/libexec/s2i/assemble
 
 # Set the default command for the resulting image
-CMD /usr/libexec/s2i/run
+CMD bundle exec middleman server
+
