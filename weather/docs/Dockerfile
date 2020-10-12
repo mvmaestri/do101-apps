@@ -12,4 +12,3 @@ RUN /usr/libexec/s2i/assemble
 
 # Set the default command for the resulting image
 CMD bundle exec middleman server --port 8080
-
