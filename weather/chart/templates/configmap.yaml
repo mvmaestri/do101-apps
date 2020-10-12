@@ -1,0 +1,30 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: example-config-feature-{{ .Values.test }}
+  version: {{ .Chart.Version }}
+  revision-type: feature
+  environment: development
+data: 
+  example.property.1: hello
+  example.property.2: world
+  example.property.file: |-
+    property.1=value-1
+    property.2=value-2
+    property.3=value-3
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: example-config-develop-{{ .Values.test }}
+  version: {{ .Chart.Version }}
+  revision-type: develop
+  environment: development
+data: 
+  example.property.1: hello
+  example.property.2: world
+  example.property.file: |-
+    property.1=value-1
+    property.2=value-2
+    property.3=value-3
