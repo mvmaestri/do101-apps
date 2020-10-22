@@ -1,4 +1,5 @@
-FROM registry.redhat.io/rhel8-beta/nodejs-14
+FROM ubi8/ruby-25
+
 # Add application sources to a directory that the assemble script expects them
 # and set permissions so that the container runs without root access
 USER 0
@@ -10,4 +11,4 @@ USER 1001
 RUN /usr/libexec/s2i/assemble
 
 # Set the default command for the resulting image
-CMD /usr/libexec/s2i/run
+CMD bundle exec middleman server --port 8080
